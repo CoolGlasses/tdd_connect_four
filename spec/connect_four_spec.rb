@@ -3,7 +3,7 @@ require 'connect_four'
 RSpec.describe Player do
     describe "name" do
         it "should display the name of the given player" do
-            player = Player.new
+            player = Player.new("Robin", "black")
             expect(player.name).to eql "#{@name}"
         end
     end
@@ -11,7 +11,7 @@ RSpec.describe Player do
 
     describe "color" do
         it "should display the color of the given player" do
-            player = Player.new
+            player = Player.new("Robin", "black")
             expect(player.color).to eql "#{@color}" 
         end
     end
@@ -21,32 +21,94 @@ end
 RSpec.describe Board do
     describe "create_board" do
         it "should create a 2D array with 7-rows" do
-            board = create_board()
+
+            board = Board.new
+            board.create_board()
             expect(board.length).to eql(7)
         end
 
         it "should have a sub-array for each row that is 8-columns wide" do
-            board = create_board()
+            board = Board.new
+            board.create_board()
             expect(board[0].length).to eql(8)
         end
 
         it "will fill the 2D array with the unicode character for an empty square" do
             square = "\u25a2"
-            board = create_board()
-            expect(board[1][1]).to eql(square.encode("utf-8"))
+            board = Board.new
+            array = board.create_board()
+            expect(array[1][1]).to eql(square.encode("utf-8"))
         end
 
         it "will fill the first column with capital letters, A thru G" do
-            board = create_board()
-            expect(board[1][0]).to eql("A")
+            board = Board.new
+            array = board.create_board()
+            expect(array[1][0]).to eql("A")
         end  
     end
 end
 
 RSpec.describe Game do
+    before do
+        @victory_diagonal_left =
+            [
+             [nil,   1,   2,   3,   4,   5,   6,   7],
+             ["A", nil, nil, nil, nil, nil, nil, nil],
+             ["B", nil, nil, nil, nil, nil, nil, nil],
+             ["C", nil, nil, nil, nil, nil, nil, nil],
+             ["D", player1, nil, nil, nil, nil, nil, nil],
+             ["E", player2, player1, nil, nil, nil, nil, nil],
+             ["F", player2, player2, player1, nil, nil, nil, nil],
+             ["G", player2, player2, player2, player1, nil, nil, nil],
+            ]
+        @victory_diagonal_right =
+            [
+             [nil,   1,   2,   3,   4,   5,   6,   7],
+             ["A", nil, nil, nil, nil, nil, nil, nil],
+             ["B", nil, nil, nil, nil, nil, nil, nil],
+             ["C", nil, nil, nil, nil, nil, nil, nil],
+             ["D", nil, nil, nil, player1, nil, nil, nil],
+             ["E", nil, nil, player1, player2, nil, nil, nil],
+             ["F", nil, player1, player2, player2, nil, nil, nil],
+             ["G", player1, player2, player2, player2, nil, nil, nil],
+            ]
+        @victory_vertical =
+            [
+             [nil,   1,   2,   3,   4,   5,   6,   7],
+             ["A", nil, nil, nil, nil, nil, nil, nil],
+             ["B", nil, nil, nil, nil, nil, nil, nil],
+             ["C", nil, nil, nil, nil, nil, nil, nil],
+             ["D", player1, nil, nil, nil, nil, nil, nil],
+             ["E", player1, nil, nil, nil, nil, nil, nil],
+             ["F", player1, nil, nil, nil, nil, nil, nil],
+             ["G", player1, nil, nil, nil, nil, nil, nil],
+            ]
+        @victory_horizontal = 
+            [
+             [nil,   1,   2,   3,   4,   5,   6,   7],
+             ["A", nil, nil, nil, nil, nil, nil, nil],
+             ["B", nil, nil, nil, nil, nil, nil, nil],
+             ["C", nil, nil, nil, nil, nil, nil, nil],
+             ["D", nil, nil, nil, nil, nil, nil, nil],
+             ["E", nil, nil, nil, nil, nil, nil, nil],
+             ["F", nil, nil, nil, nil, nil, nil, nil],
+             ["G", player1, player1, player1, player1, nil, nil, nil],
+            ]
+        @nil_board = 
+            [
+             [nil,   1,   2,   3,   4,   5,   6,   7],
+             ["A", nil, nil, nil, nil, nil, nil, nil],
+             ["B", nil, nil, nil, nil, nil, nil, nil],
+             ["C", nil, nil, nil, nil, nil, nil, nil],
+             ["D", nil, nil, nil, nil, nil, nil, nil],
+             ["E", nil, nil, nil, nil, nil, nil, nil],
+             ["F", nil, nil, nil, nil, nil, nil, nil],
+             ["G", nil, nil, nil, nil, nil, nil, nil],
+            ]
     describe "new_game" do
         it "should create a new instance of the Board class" do
-            expect().to eql
+            board = Board.new
+            expect(board).to_not eql(nil)
         end
     end
 
@@ -60,14 +122,6 @@ RSpec.describe Game do
 
         it "should accept a 2D array without victory conditions and return false" do
             expect(game_over()).to eql false
-        end
-
-        it "should call helper method #diagonal_victory_conditions to determine if a diagonal win was played" do
-
-        end
-        
-        it "should call helper method #row_column_victory_conditions to determine if a diagonal win was played" do
-        
         end
     end
 
