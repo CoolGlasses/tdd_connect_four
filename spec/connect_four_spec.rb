@@ -55,10 +55,49 @@ RSpec.describe Game do
             expect(game_over()).to eql true
         end
 
+        it "should return the color of the piece that accomplished victory conditions" do
+        end
+
         it "should accept a 2D array without victory conditions and return false" do
             expect(game_over()).to eql false
         end
+
+        it "should call helper method #diagonal_victory_conditions to determine if a diagonal win was played" do
+
+        end
         
+        it "should call helper method #row_column_victory_conditions to determine if a diagonal win was played" do
+        
+        end
+    end
+
+    describe "diagonal_victory_conditions" do
+        it "should accept a board as an argument" do
+        end
+
+        it "should determine if 4 diagonally adjacent cells, to the right, are the same" do
+        end
+
+        it "should determine if 4 diagonally adjacent cells, to the left, are the same" do
+        end
+
+        it "should not allow 'nil' adjacent cells to trigger victory" do
+        end
+    
+    end
+
+    describe "row_column_victory_conditions" do
+        it "should accept a board as an argument" do
+        end
+        
+        it "should determine if 4 horizontally adjacent cells are the same" do
+        end
+
+        it "should determine if 4 vertically adjacent cells are the same" do
+        end
+
+        it "should not allow 'nil' adjacent cells to trigger victory" do
+        end
     end
 
     describe "get_players" do
