@@ -39,6 +39,12 @@ class Board
         end
         return initial_board
     end
+
+    def make_move(board, move)
+    end
+
+    def display_board
+    end
 end
 
 class Game
@@ -47,6 +53,7 @@ class Game
 
     def initialize
         @board = Board.new
+        @board_array = @board_instance.board 
         @player1 = get_player()
         @player2 = get_player()
         play()
@@ -84,13 +91,51 @@ class Game
         end
     end
 
-    def game_over
+    def game_over(board)
+        if diagonal_victory_conditions(board) == true || row_column_victory_conditions(board) == true
+            return true
+        else
+            return false    
+        end
     end
 
     def play 
+        turn = @player2
+        while !game_over(@board.board)
+            turn = turn_check(turn)
+            display_board()
+            move = get_move(turn.name)
+            @board = @board.make_move(@board.board, move)     
+        end
+
+        p "Game over!  #{turn.name}, you win!"
     end
 
-    def get_move
+    def display_board
+        @board.display_board
+    end
+
+    def turn_check(turn)
+        if turn == @player1
+            turn = @player2
+        else
+            turn = @player1
+        end
+        return turn
+    end
+
+    def get_move(name)
+        p "Okay #{name}, you're up.  Whats your move? (Pick a Column Number)"
+        move = gets.chomp
+        if valid_move_check(move)
+            return move
+        else
+            p "I'm sorry, that is not a valid move.  Please try again!"
+            get_move(name)
+        end
+    end
+
+    def valid_move_check(move)
     end
 
     def diagonal_victory_conditions(board)
