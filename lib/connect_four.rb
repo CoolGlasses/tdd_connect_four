@@ -47,7 +47,24 @@ class Board
         return board
     end
 
-    def display_board
+    def display_board(board=@board)
+        puts
+        print board[0]
+        puts 
+        print board[1]
+        puts
+        print board[2]
+        puts 
+        print board[3]
+        puts
+        print board[4]
+        puts 
+        print board[5]
+        puts
+        print board[6]
+        puts 
+        print board[7]
+        puts
     end
 end
 
