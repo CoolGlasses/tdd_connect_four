@@ -136,6 +136,24 @@ class Game
     end
 
     def valid_move_check(move)
+        case move
+            when "1"
+                true
+            when "2"
+                true
+            when "3"
+                true
+            when "4"
+                true
+            when "5"
+                true
+            when "6"
+                true
+            when "7"
+                true
+            else
+                false
+        end
     end
 
     def diagonal_victory_conditions(board)
