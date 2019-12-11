@@ -29,18 +29,22 @@ class Board
              ["F", nil, nil, nil, nil, nil, nil, nil],
              ["G", nil, nil, nil, nil, nil, nil, nil],
             ]
-        
-        initial_board.each do |row|
-            row.each do |cell|
-                if cell == nil
-                    cell = "\u25a2".encode("utf-8")
-                end
-            end
-        end
         return initial_board
     end
 
-    def make_move(board, move)
+    def make_move(board, move, color)
+        move = move.to_i
+        i = 7
+        dropped = false
+        while !dropped
+            if board[i][move] == nil
+                board[i][move] = color
+                dropped = true
+            else
+                i -= 1
+            end
+        end
+        return board
     end
 
     def display_board
@@ -105,7 +109,7 @@ class Game
             turn = turn_check(turn)
             display_board()
             move = get_move(turn.name)
-            @board = @board.make_move(@board.board, move)     
+            @board.board = @board.make_move(@board.board, move, turn.color)     
         end
 
         p "Game over!  #{turn.name}, you win!"
