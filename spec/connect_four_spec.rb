@@ -2,17 +2,18 @@ require 'rspec'
 require 'connect_four'
 
 RSpec.describe Player do
-    describe "name" do
+    subject(:player) { Player.new("Robin", "black") }
+    context "after a player is created"
+
+    describe "#name" do
         it "should display the name of the given player" do
-            player = Player.new("Robin", "black")
             expect(player.name).to eql "Robin"
         end
     end
         
 
-    describe "color" do
+    describe "#color" do
         it "should display the color of the given player" do
-            player = Player.new("Robin", "black")
             expect(player.color).to eql "black" 
         end
     end
@@ -20,29 +21,22 @@ RSpec.describe Player do
 end
 
 RSpec.describe Board do
-    describe "create_board" do
-        it "should create a 2D array with 7-rows" do
-
-            board = Board.new
-            board.create_board()
-            expect(board.length).to eql(7)
+    subject(:board) { Board.new }
+    describe "#create_board" do
+        it "should create a 2D array with 8-rows" do
+            expect(board.create_board.length).to eql(8)
         end
 
         it "should have a sub-array for each row that is 8-columns wide" do
-            board = Board.new
-            board.create_board()
-            expect(board[0].length).to eql(8)
+            expect(board.create_board[0].length).to eql(8)
         end
 
-        it "will fill the 2D array with the unicode character for an empty square" do
-            square = "\u25a2"
-            board = Board.new
-            array = board.create_board()
-            expect(array[1][1]).to eql(square.encode("utf-8"))
-        end
+        # it "will fill the 2D array with the unicode character for an empty square" do
+        #     square = "\u25a2"
+        #     expect(board.create_board[1][1]).to eql(square.encode("utf-8"))
+        # end
 
         it "will fill the first column with capital letters, A thru G" do
-            board = Board.new
             array = board.create_board()
             expect(array[1][0]).to eql("A")
         end  
@@ -109,14 +103,14 @@ RSpec.describe Game do
              ["G", nil, nil, nil, nil, nil, nil, nil],
             ]
     end
-    describe "new_game" do
+    describe "#new_game" do
         it "should create a new instance of the Board class" do
             board = Board.new
             expect(board).to_not eql(nil)
         end
     end
 
-    describe "game_over" do
+    describe "#game_over" do
         it "should accept a 2D array with victory conditions met as an argument and return true" do
             expect(game_over(@victory_vertical)).to eql([true, player1])
         end
@@ -130,7 +124,7 @@ RSpec.describe Game do
         end
     end
 
-    describe "diagonal_victory_conditions" do
+    describe "#diagonal_victory_conditions" do
         it "should accept a board as an argument" do
             expect(diagonal_victory_conditions(@nil_board)).to_not raise_error
         end
@@ -149,7 +143,7 @@ RSpec.describe Game do
     
     end
 
-    describe "row_column_victory_conditions" do
+    describe "#row_column_victory_conditions" do
         it "should accept a board as an argument" do
             expect(row_column_victory_conditions(@nil_board)).to_not raise_error
         end
@@ -167,59 +161,28 @@ RSpec.describe Game do
         end
     end
 
-    describe "get_players" do
+    describe "#get_players" do
 
-        it "should assign user input to the variable name in a new instance of the Player class" do
-            
-        end
+        it "should assign user input to the variable name in a new instance of the Player class"
     end
 
-    describe "get_color" do
-        it "should assign user input for color choice to variable color of the established instance of the Player class" do
-            
-        end
-
-        it "should require player 2 to be assigned the color choice player 1 did not choose -- if player 1 exists" do
-            
-        end
-        
+    describe "#get_color" do
+        it "should assign user input for color choice to variable color of the established instance of the Player class" 
+        it "should require player 2 to be assigned the color choice player 1 did not choose -- if player 1 exists"
     end
 
-    describe "play" do
-        it "should display the board" do
-            
-        end
-
-        it "should #get_move to allow a player to take a turn" do
-            
-        end
-
-       
-
-        it "should call #game_over after every move to determine if victory conditions had been met" do
-            
-        end
-
-        it "should display the updated board after every move" do
-            
-        end
-
-
-        
+    describe "#play" do
+        it "should display the board"
+        it "should #get_move to allow a player to take a turn"
+        it "should call #game_over after every move to determine if victory conditions had been met" 
+        it "should display the updated board after every move" 
     end
 
-    describe "get_move" do
-        it "should ask for a column number to play from user" do
-            
-        end
+    describe "#get_move" do
+        it "should ask for a column number to play from user"
 
-        it "should check move choice for validity" do
-            
-        end
+        it "should check move choice for validity"
 
-        it "should return a column number stipulating the move to be made" do
-            
-        end
-        
+        it "should return a column number stipulating the move to be made" 
     end
 end
