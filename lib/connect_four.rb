@@ -11,6 +11,8 @@ class Player
 end
 
 class Board
+    attr_reader :board
+
     def initialize
         @board = create_board()
     end
@@ -40,13 +42,46 @@ class Board
 end
 
 class Game
+    attr_reader :player1, :player2
+    attr_accessor :board
+
     def initialize
+        @board = Board.new
+        @player1 = get_player()
+        @player2 = get_player()
+        play()
     end
 
-    def get_players
+    def get_player
+        if @player1 == nil
+            p "Player 1, what is your name?"
+            name = gets.chomp
+            color = get_color(name)
+            player = Player.new(name, color)
+            return player1
+        else
+            p "Player 2, what is your name?"
+            name = gets.chomp
+            color = get_color(name)
+            player = Player.new(name, color)
+            return player2
+        end
     end
 
-    def get_color
+    def get_color(player) ###need to check and make sure input is valid
+        if @player1 == nil
+            p "#{name}, what color do you, Black or White?"
+            color = gets.chomp
+            return color
+        else
+            if @player1.color == "Black"
+                color = "White"
+            else
+                color = "Black"
+            end
+            p "#{name}, your color is #{color}!"
+            return color
+        end
     end
 
     def game_over

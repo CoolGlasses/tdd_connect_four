@@ -126,7 +126,7 @@ RSpec.describe Game do
 
     describe "#diagonal_victory_conditions" do
         it "should accept a board as an argument" do
-            expect(diagonal_victory_conditions(@nil_board)).to_not raise_error
+            expect { diagonal_victory_conditions(@nil_board)}.to_not raise_error
         end
 
         it "should determine if 4 diagonally adjacent cells, to the right, are the same" do
