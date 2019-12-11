@@ -1,3 +1,4 @@
+require 'rspec'
 require 'connect_four'
 
 RSpec.describe Player do
@@ -167,9 +168,6 @@ RSpec.describe Game do
     end
 
     describe "get_players" do
-        it "should ask for a user name by asking for user input" do
-            
-        end
 
         it "should assign user input to the variable name in a new instance of the Player class" do
             
@@ -177,10 +175,6 @@ RSpec.describe Game do
     end
 
     describe "get_color" do
-        it "should ask for a users color choice by asking for user input" do
-            
-        end
-
         it "should assign user input for color choice to variable color of the established instance of the Player class" do
             
         end
