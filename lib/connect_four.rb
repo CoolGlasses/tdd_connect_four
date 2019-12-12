@@ -74,7 +74,6 @@ class Game
 
     def initialize
         @board = Board.new
-        @board_array = @board_instance.board 
         @player1 = get_player()
         @player2 = get_player()
         play()
@@ -177,7 +176,95 @@ class Game
         end
     end
 
-    def diagonal_victory_conditions(board)
+    def diagonal_victory_conditions(board, color)
+        count = 0
+        i = 1
+        while i < 5
+            row = i
+            col = 1
+            streak = true
+            while streak
+                if board[row][col] == color
+                    count += 1
+                    row += 1
+                    col += 1
+
+                    if count == 4
+                        return true
+                    end
+                else
+                    streak = false
+                    count = 0
+                    i += 1
+                end
+            end
+        end
+
+        i = 1
+        while i < 5
+            row = 1
+            col = i
+            streak = true
+            while streak
+                if board[row][col] == color
+                    count += 1
+                    row += 1
+                    col += 1
+
+                    if count == 4
+                        return true
+                    end
+                else
+                    streak = false
+                    count = 0
+                    i += 1
+                end
+            end
+        
+        i = 7
+        while i > 3
+            row = i
+            col = 1
+            streak = true
+            while streak
+                if board[row][col] == color
+                    count += 1
+                    row -= 1
+                    col += 1
+
+                    if count == 4
+                        return true
+                    end
+                else
+                    streak = false
+                    count = 0
+                    i -= 1
+                end
+            end
+        end
+
+        i = 1
+        while i < 5
+            row = 7
+            col = i
+            streak = true
+            while streak
+                if board[row][col] == color
+                    count += 1
+                    row -= 1
+                    col += 1
+
+                    if count == 4
+                        return true
+                    end
+                else
+                    streak = false
+                    count = 0
+                    i -= 1
+                end
+            end
+        end
+        return false
     end
 
     def row_column_victory_conditions(board)
