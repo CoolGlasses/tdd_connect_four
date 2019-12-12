@@ -193,9 +193,12 @@ class Game
                         return true
                     end
                 else
-                    streak = false
+                    if row + 1 == 5
+                        streak = false
+                        i += 1
+                    end
                     count = 0
-                    i += 1
+                    row += 1
                 end
             end
         end
@@ -215,11 +218,15 @@ class Game
                         return true
                     end
                 else
-                    streak = false
+                    if col + 1 == 5
+                        streak = false
+                        i += 1
+                    end
                     count = 0
-                    i += 1
+                    col += 1
                 end
             end
+        end
         
         i = 7
         while i > 3
@@ -236,9 +243,12 @@ class Game
                         return true
                     end
                 else
-                    streak = false
+                    if row - 1 == 3
+                        streak = false
+                        i -= 1
+                    end
                     count = 0
-                    i -= 1
+                    row -= 1
                 end
             end
         end
@@ -258,15 +268,61 @@ class Game
                         return true
                     end
                 else
-                    streak = false
+                    if col + 1 == 5
+                        streak = false
+                        i += 1
+                    end
                     count = 0
-                    i -= 1
+                    col += 1
                 end
             end
         end
         return false
     end
 
-    def row_column_victory_conditions(board)
+    def row_column_victory_conditions(board, color)
+        count = 0
+
+        board.each do |row|
+            i = 1
+            while i < row.length - 1
+                if row[i] == color
+                    count += 1
+                    i += 1
+
+                    if count == 4
+                        return true
+                    end
+                else
+                    count = 0
+                    i += 1
+                end
+            end
+        end
+
+        i = 1
+        while i < 8
+            row = 1
+            col = i
+            streak = true
+            while streak
+                if board[row][col] == color
+                    count += 1
+                    row += 1
+
+                    if count == 4
+                        return true
+                    end
+                else
+                    if row + 1 == 8
+                        streak = false
+                        i += 1
+                    end
+                    count = 0
+                    col += 1
+                end
+            end 
+        end
+        return false
     end
 end

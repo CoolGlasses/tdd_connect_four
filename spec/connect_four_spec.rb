@@ -31,11 +31,6 @@ RSpec.describe Board do
             expect(board.create_board[0].length).to eql(8)
         end
 
-        # it "will fill the 2D array with the unicode character for an empty square" do
-        #     square = "\u25a2"
-        #     expect(board.create_board[1][1]).to eql(square.encode("utf-8"))
-        # end
-
         it "will fill the first column with capital letters, A thru G" do
             array = board.create_board()
             expect(array[1][0]).to eql("A")
